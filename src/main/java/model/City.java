@@ -15,15 +15,20 @@ import java.util.Set;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private int zip;
+    @Column(name = "city_name")
     private String cityName;
+    @Column(name = "region_name")
+    private String regionName;
+    @Column(name = "municipality_name")
+    private String municipalityName;
 
 
-    public City(int zip, String cityName) {
+    public City(int zip, String cityName, String regionName, String municipalityName) {
         this.zip = zip;
         this.cityName = cityName;
+        this.regionName = regionName;
+        this.municipalityName = municipalityName;
     }
 
     @OneToMany(mappedBy = "city")
