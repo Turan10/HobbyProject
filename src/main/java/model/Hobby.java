@@ -18,15 +18,21 @@ public class Hobby {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String wikiLink;
+    private String category;
+
 
 
     @ManyToMany(mappedBy = "hobbies")
     private Set<Person> persons = new HashSet<>();
 
+    @JoinColumn(name = "type_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Type type;
 
-    public Hobby(String name) {
+    public Hobby(String name, String wikiLink, String category) {
         this.name = name;
+        this.wikiLink = wikiLink;
+        this.category = category;
     }
 }

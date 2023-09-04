@@ -14,7 +14,9 @@ public class Main {
 
         try(EntityManager em = emf.createEntityManager()){
             CityDAO populateZip = new CityDAO();
-            populateZip.populateDatabase(em, "src/main/resources/zipcodes.csv");
+            populateZip.populateDatabase(em, "src/main/resources/zip.csv");
+            //populateZip.populateDatabase(em, "src/main/resources/hobby.csv");
+
         }
     }
 }

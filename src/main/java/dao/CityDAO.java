@@ -26,18 +26,16 @@ public class CityDAO {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
+            em.getTransaction().begin();
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                City city = new City();
-                city.setZip(Integer.parseInt(values[0]));
-                city.setCityName(values[1]);
-                city.setRegionName(values[2]);
-                city.setMunicipalityName(values[3]);
-                em.persist(city);
+                em.createNativeQuery(line).executeUpdate();
             }
+            em.getTransaction().commit();
         } catch (IOException e) {
+            em.getTransaction().rollback();
             logger.log(System.Logger.Level.ERROR, "Error populating database", e);
             throw new RuntimeException("Error populating database", e);
         }
     }
+
 }

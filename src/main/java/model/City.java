@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
+@Table(name = "zipcode")
 public class City {
     @Id
     private int zip;
