@@ -39,4 +39,13 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private Set<Phone> phones = new HashSet<>();
 
+
+    public void addHobby(Hobby hobby){
+        hobbies.add(hobby);
+        if(!hobby.getPersons().contains(this)){
+        hobby.getPersons().add(this);
+    }
+    }
+
+
 }

@@ -20,6 +20,8 @@ public class Hobby {
     private String name;
     private String wikiLink;
     private String category;
+    private String type;
+
 
 
 
@@ -28,11 +30,9 @@ public class Hobby {
 
     @JoinColumn(name = "type_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Type type;
+    private Type typeType;
 
-    public Hobby(String name, String wikiLink, String category) {
+    public Hobby(String name) {
         this.name = name;
-        this.wikiLink = wikiLink;
-        this.category = category;
     }
 }
