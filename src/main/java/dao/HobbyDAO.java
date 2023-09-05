@@ -1,38 +1,29 @@
 package dao;
 
+import config.HibernateConfig;
+import dto.HobbyWithCount;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 import model.Hobby;
+import model.Person;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 public class HobbyDAO {
-    private static final System.Logger logger = System.getLogger(HobbyDAO.class.getName());
+    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-    public void populateHobbies(EntityManager em, String fileName) {
-        if (em == null) {
-            throw new IllegalArgumentException("EntityManager cannot be null");
-        }
-        if (fileName == null) {
-            throw new IllegalArgumentException("File name cannot be null");
+    public List<HobbyWithCount> GetHobbiesWithCount() {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<HobbyWithCount> query = em.createQuery("Select new dto.HobbyWithCount(h, count (p)) from Hobby h left join h.persons p group by h", HobbyWithCount.class);
+            return query.getResultList();
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            em.getTransaction().begin();
-
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                Hobby hobby = new Hobby(values[0], values[1], values[2], values[3]);
-                em.persist(hobby);
-            }
-
-            em.getTransaction().commit();
-        } catch (IOException e) {
-            em.getTransaction().rollback();
-            logger.log(System.Logger.Level.ERROR, "Error populating database", e);
-            throw new RuntimeException("Error populating database", e);
-        }
     }
+
+
 }
