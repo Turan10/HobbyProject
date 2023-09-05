@@ -29,7 +29,7 @@ public class Adress {
     private Set<Person> persons;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private City city;
 
 }

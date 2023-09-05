@@ -14,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
+@Table(name = "persons_temp")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +30,31 @@ public class Person {
         this.age = age;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
     private Set<Hobby> hobbies = new HashSet<>();
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Adress address;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade=CascadeType.ALL)
     private Set<Phone> phones = new HashSet<>();
+
+    public void addHobby(Hobby hobby){
+        hobbies.add(hobby);
+        if(hobby != null)
+        {
+            hobby.getPersons().add(this);
+        }
+    }
+
+    public void addPhone(Phone phone)
+    {
+        phones.add(phone);
+        if (phone != null)
+        {
+            phone.setPerson(this);
+        }
+    }
 
 }
