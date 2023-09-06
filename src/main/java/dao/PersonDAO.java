@@ -26,6 +26,14 @@ public class PersonDAO {
 
     }
 
+    public Person getPersonInfoByPhoneNumber(String number) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p JOIN p.phones ph WHERE ph.number = :number", Person.class);
+            query.setParameter("number", number);
+            return query.getSingleResult();
+        }
+    }
+
 
     public void addPerson(Person person) {
         try (EntityManager em = emf.createEntityManager()) {
@@ -36,53 +44,32 @@ public class PersonDAO {
         }
     }
 
-        public void deletePerson(Person person) {
-            try (EntityManager em = emf.createEntityManager()) {
-                em.getTransaction().begin();
-                em.remove(person);
-                em.getTransaction().commit();
-            }
+    public void deletePerson(Person person) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.remove(person);
+            em.getTransaction().commit();
         }
-
-        public List<Phone> phoneNumberByPerson(int id) {
-            try (EntityManager em = emf.createEntityManager()) {
-                TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p JOIN p.person ps WHERE ps.id = :id", Phone.class);
-                query.setParameter("id", id);
-                return query.getResultList();
-            }
-        }
-
-    // populating randos
-    public void createRandomPersons(EntityManager em, int numberOfPersons) {
-        if (em == null) {
-            throw new IllegalArgumentException("EntityManager cannot be null");
-        }
-
-        List<Hobby> allHobbies = em.createQuery("SELECT h FROM Hobby h", Hobby.class).getResultList();
-
-        em.getTransaction().begin();
-
-        for (int i = 0; i < numberOfPersons; i++) {
-
-            Collections.shuffle(allHobbies);
-            Hobby randomHobby = allHobbies.get(0);
-
-
-            Person newPerson = new Person("Ben" + i, "Dover" + i, 45 + i);
-
-            Set<Hobby> randomHobbies = new HashSet<>();
-            randomHobbies.add(randomHobby);
-
-            newPerson.setHobbies(randomHobbies);
-
-
-            em.persist(newPerson);
-        }
-
-        em.getTransaction().commit();
     }
 
+    public Person updatePerson(Person person) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            Person person1 = em.merge(person);
+            em.getTransaction().commit();
+            return person1;
+        }
     }
+
+    public Person getPersonByName(String name) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Person.class, name);
+        }
+
+    }
+
+
+}
 
 
 

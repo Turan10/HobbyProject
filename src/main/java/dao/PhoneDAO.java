@@ -1,54 +1,53 @@
 package dao;
 
 import config.HibernateConfig;
-import dto.HobbyWithCount;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import model.Phone;
 
 import java.util.List;
 
-public class HobbyDAO {
-    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+public class PhoneDAO {
 
-    public List<HobbyWithCount> GetHobbiesWithCount() {
+    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+    public List<Phone> phoneNumberByPerson(int id) {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<HobbyWithCount> query = em.createQuery("Select new dto.HobbyWithCount(h, count (p)) from Hobby h left join h.persons p group by h", HobbyWithCount.class);
+            TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p JOIN p.person ps WHERE ps.id = :id", Phone.class);
+            query.setParameter("id", id);
             return query.getResultList();
         }
-
     }
 
-    public void persistHobby(Hobby hobby) {
+    public void addPhone(Phone phone) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.persist(hobby);
+            em.persist(phone);
             em.getTransaction().commit();
         }
     }
 
-    public void deleteHobby(Hobby hobby) {
+    public void deletePhone(Phone phone) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.remove(hobby);
+            em.remove(phone);
             em.getTransaction().commit();
         }
     }
 
-    public Hobby updateHobby(Hobby hobby) {
+    public Phone updatePhone(Phone phone) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Hobby hobby1 = em.merge(hobby);
+            Phone phone1 = em.merge(phone);
             em.getTransaction().commit();
-            return hobby1;
+            return phone1;
         }
     }
 
-    public Hobby getHobbyByName(String name) {
+    public Phone getPhoneByNumber(String number) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.find(Hobby.class, name);
+            return em.find(Phone.class, number);
         }
     }
-
-
+    
 }

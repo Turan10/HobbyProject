@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-public class Adress {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,7 +20,7 @@ public class Adress {
 
 
 
-    public Adress(String street) {
+    public Address(String street) {
         this.street = street;
 
     }
