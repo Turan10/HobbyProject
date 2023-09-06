@@ -1,13 +1,26 @@
 package dao;
 
+import dto.CityPostcodeAndName;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 import model.City;
 
+import java.util.List;
 
 
 public class CityDAO {
+
+    private static CityDAO instance;
     EntityManagerFactory emf = config.HibernateConfig.getEntityManagerFactoryConfig();
+
+
+    public static CityDAO getInstance() {
+        if (instance == null) {
+            instance = new CityDAO();
+        }
+        return instance;
+    }
 
 
     public void persistCity(City city) {
@@ -39,6 +52,16 @@ public class CityDAO {
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(City.class, name);
         }
+    }
+
+
+    public List<CityPostcodeAndName> getAllPostcodesAndCityNamesInDenmark() {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<CityPostcodeAndName> query = em.createQuery("SELECT c FROM City c", CityPostcodeAndName.class);
+            return query.getResultList();
+
+        }
+
     }
 
 

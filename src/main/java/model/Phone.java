@@ -23,4 +23,10 @@ public class Phone {
 
     @ManyToOne
     private Person person;
+
+
+
+
 }
+
+

@@ -11,7 +11,19 @@ import java.io.IOException;
 
 
 public class TypeDAO {
+
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+    private static TypeDAO instance;
+
+
+    public static TypeDAO getInstance() {
+        if (instance == null) {
+            instance = new TypeDAO();
+        }
+        return instance;
+    }
+
     public void populateTypes(EntityManager em, String fileName) {
         if (em == null) {
             throw new IllegalArgumentException("EntityManager cannot be null");

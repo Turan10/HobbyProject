@@ -9,8 +9,17 @@ import model.Phone;
 import java.util.List;
 
 public class PhoneDAO {
+    private static PhoneDAO instance;
 
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+    public static PhoneDAO getInstance() {
+        if (instance == null) {
+            instance = new PhoneDAO();
+        }
+        return instance;
+    }
+
     public List<Phone> phoneNumberByPerson(int id) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p JOIN p.person ps WHERE ps.id = :id", Phone.class);
