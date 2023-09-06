@@ -5,11 +5,20 @@ import dto.HobbyWithCount;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import model.Hobby;
 
 import java.util.List;
 
 public class HobbyDAO {
+    private static HobbyDAO instance;
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+    public static HobbyDAO getInstance() {
+        if (instance == null) {
+            instance = new HobbyDAO();
+        }
+        return instance;
+    }
 
     public List<HobbyWithCount> GetHobbiesWithCount() {
         try (EntityManager em = emf.createEntityManager()) {

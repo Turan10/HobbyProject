@@ -14,7 +14,16 @@ import java.util.List;
 import java.util.Set;
 
 public class PersonDAO {
+
+    private static PersonDAO instance;
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+    public static PersonDAO getInstance() {
+        if (instance == null) {
+            instance = new PersonDAO();
+        }
+        return instance;
+    }
 
 
     public List<Person> getPersonsByHobby(String hobbyName) {
@@ -64,6 +73,15 @@ public class PersonDAO {
     public Person getPersonByName(String name) {
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(Person.class, name);
+        }
+
+    }
+
+        public List<Person> findPersonsByCityZip(int zip) {
+            try(EntityManager em = emf.createEntityManager()){
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.address.city.zip = :zip", Person.class);
+            query.setParameter("zip", zip);
+            return query.getResultList();
         }
 
     }

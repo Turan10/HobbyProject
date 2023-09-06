@@ -8,6 +8,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PopulateDAO {
+    private static PopulateDAO instance;
+
+
+    public static PopulateDAO getInstance() {
+        if (instance == null) {
+            instance = new PopulateDAO();
+        }
+        return instance;
+    }
     private static final System.Logger logger = System.getLogger(CityDAO.class.getName());
     public void populateDatabase(EntityManager em, String fileName) {
         if (em == null) {
