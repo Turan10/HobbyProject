@@ -21,6 +21,7 @@ public class Main {
             System.out.println("Name: " + person.getFirstName() + " " + person.getLastName());
             System.out.println("Age: " + person.getAge());
 
+<<<<<<< Updated upstream
             CityDAOImpl cityDAO = new CityDAOImpl();
             Map<Integer, String> postcodesAndCities = cityDAO.getAllPostcodesAndCityNamesInDenmark();
 
@@ -28,6 +29,28 @@ public class Main {
             for (Map.Entry<Integer, String> entry : postcodesAndCities.entrySet()) {
                 System.out.println("ZIP Code: " + entry.getKey() + ", City: " + entry.getValue());
             }
+=======
+        /*EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+        try(EntityManager em = emf.createEntityManager()){
+            CityDAO populateZip = new CityDAO();
+            populateZip.populateDatabase(em, "src/main/resources/zip.csv");*/
+
+
+            //populateZip.populateDatabase(em, "src/main/resources/hobby.csv");
+
+
+
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+        try(EntityManager em = emf.createEntityManager()) {
+            TypeDAO populateType = new TypeDAO();
+            populateType.populateTypes(em,"src/main/resources/hobby.csv");
+
+            PopulateDAO populateDAO = new PopulateDAO();
+            populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
+
+>>>>>>> Stashed changes
         }
     }
 }

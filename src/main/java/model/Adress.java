@@ -18,9 +18,13 @@ public class Adress {
     private int id;
     private String street;
 
+<<<<<<< Updated upstream:src/main/java/model/Adress.java
 
 
     public Adress(String street) {
+=======
+    public Address(String street) {
+>>>>>>> Stashed changes:src/main/java/model/Address.java
         this.street = street;
 
     }
