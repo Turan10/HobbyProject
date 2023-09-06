@@ -1,6 +1,8 @@
 package dao;
 
+import config.HibernateConfig;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import model.Type;
 
 import java.io.BufferedReader;
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 
 public class TypeDAO {
+    EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
     public void populateTypes(EntityManager em, String fileName) {
         if (em == null) {
             throw new IllegalArgumentException("EntityManager cannot be null");
@@ -25,7 +28,7 @@ public class TypeDAO {
                 String[] values = line.split(",");
                 String typeName = values[6];
 
-                //fjerner de unødvendige
+                //fjerner de unødvendige tegn
                 typeName = typeName.replaceAll("['();]", "");
 
                 //tjek om typen findes for at undgå dubletter
@@ -43,6 +46,12 @@ public class TypeDAO {
         }
     }
 
-
+    public void persistType(Type type) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.persist(type);
+            em.getTransaction().commit();
+        }
+    }
 
 }

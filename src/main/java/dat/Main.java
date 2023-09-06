@@ -30,9 +30,6 @@ public class Main {
             PopulateDAO populateDAO = new PopulateDAO();
             populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
 
-            PersonDAO personDAO = new PersonDAO();
-            personDAO.createRandomPersons(em,5);
-
 
         }
 

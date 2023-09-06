@@ -4,14 +4,10 @@ import config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-import model.Hobby;
-import model.Person;
-import model.Phone;
 
-import java.util.Collections;
-import java.util.HashSet;
+import model.Person;
+
 import java.util.List;
-import java.util.Set;
 
 public class PersonDAO {
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
