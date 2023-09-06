@@ -11,28 +11,34 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
+@Table(name = "hobbies_temp")
 public class Hobby {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false)
     private String name;
-    private String wikiLink;
+
+    @Column(nullable = false)
+    private String wikilink;
+
+    @Column(nullable = false)
     private String category;
 
-
-
-    @ManyToMany(mappedBy = "hobbies")
-    private Set<Person> persons = new HashSet<>();
-
-    @JoinColumn(name = "type_id")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Type type;
 
-    public Hobby(String name, String wikiLink, String category) {
+    @ManyToMany
+    private Set<Person> persons = new HashSet<>();
+
+
+    public Hobby(String name, String wikilink, String category, String type) {
         this.name = name;
-        this.wikiLink = wikiLink;
+        this.wikilink = wikilink;
         this.category = category;
+        this.type = new Type(type);
     }
 }
