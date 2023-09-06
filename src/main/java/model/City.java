@@ -33,5 +33,5 @@ public class City {
     }
 
     @OneToMany(mappedBy = "city")
-    private Set<Adress> addresses = new HashSet<>();
+    private Set<Address> addresses = new HashSet<>();
 }

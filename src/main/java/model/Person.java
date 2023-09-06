@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +33,7 @@ public class Person {
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Adress address;
+    private Address address;
 
     @OneToMany(mappedBy = "person")
     private Set<Phone> phones = new HashSet<>();
