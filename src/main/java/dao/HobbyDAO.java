@@ -5,13 +5,7 @@ import dto.HobbyWithCount;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-import model.Hobby;
-import model.Person;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 public class HobbyDAO {

@@ -1,8 +1,7 @@
 package dat;
 
 import config.HibernateConfig;
-import dao.CityDAO;
-import dao.HobbyDAO;
+import dao.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -22,12 +21,20 @@ public class Main {
 
 
 
-            EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-            try (EntityManager em = emf.createEntityManager()) {
-                HobbyDAO populateHobby = new HobbyDAO();
-                populateHobby.populateHobbies(em, "src/main/resources/hobby.csv");
+        try(EntityManager em = emf.createEntityManager()) {
+            TypeDAO populateType = new TypeDAO();
+            populateType.populateTypes(em,"src/main/resources/hobby.csv");
+
+            PopulateDAO populateDAO = new PopulateDAO();
+            populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
+
+            PersonDAO personDAO = new PersonDAO();
+            personDAO.createRandomPersons(em,5);
+
 
         }
+
     }
 }

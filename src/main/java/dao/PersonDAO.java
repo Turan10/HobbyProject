@@ -8,7 +8,10 @@ import model.Hobby;
 import model.Person;
 import model.Phone;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PersonDAO {
     EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
@@ -49,7 +52,35 @@ public class PersonDAO {
             }
         }
 
+    // populating randos
+    public void createRandomPersons(EntityManager em, int numberOfPersons) {
+        if (em == null) {
+            throw new IllegalArgumentException("EntityManager cannot be null");
+        }
 
+        List<Hobby> allHobbies = em.createQuery("SELECT h FROM Hobby h", Hobby.class).getResultList();
+
+        em.getTransaction().begin();
+
+        for (int i = 0; i < numberOfPersons; i++) {
+
+            Collections.shuffle(allHobbies);
+            Hobby randomHobby = allHobbies.get(0);
+
+
+            Person newPerson = new Person("Ben" + i, "Dover" + i, 45 + i);
+
+            Set<Hobby> randomHobbies = new HashSet<>();
+            randomHobbies.add(randomHobby);
+
+            newPerson.setHobbies(randomHobbies);
+
+
+            em.persist(newPerson);
+        }
+
+        em.getTransaction().commit();
+    }
 
     }
 
