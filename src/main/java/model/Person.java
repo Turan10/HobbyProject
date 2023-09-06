@@ -35,7 +35,7 @@ public class Person {
 
 
     @ManyToOne
-    private Adress address;
+    private Address address;
 
     @OneToMany(mappedBy = "person", cascade=CascadeType.ALL)
     private Set<Phone> phones = new HashSet<>();
