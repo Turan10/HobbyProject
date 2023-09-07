@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
+import model.Address;
 import model.Person;
 
 import java.util.List;
@@ -46,7 +47,14 @@ public class PersonDAO {
             em.getTransaction().begin();
             em.persist(person);
             em.getTransaction().commit();
+        }
+    }
 
+    public void addPersonAddress(Address address) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.persist(address);
+            em.getTransaction().commit();
         }
     }
 
@@ -82,12 +90,8 @@ public class PersonDAO {
             query.setParameter("zip", zip);
             return query.getResultList();
         }
-
     }
-
-
-
-    }
+}
 
 
 

@@ -12,13 +12,9 @@ public class PersonTest {
 
     private Person person;
 
-    @BeforeEach
-    public void setUp() {
-        person = new Person("Metin", "Akbas", 22);
-    }
-
     @Test
     public void testConstructor() {
+        person = new Person("Metin", "Akbas", 22);
         assertEquals("Metin", person.getFirstName());
         assertEquals("Akbas", person.getLastName());
         assertEquals(22, person.getAge());
@@ -26,6 +22,7 @@ public class PersonTest {
 
     @Test
     public void testSettersAndGetters() {
+        person = new Person("Metin", "Akbas", 22);
         person.setFirstName("Jeanette");
         person.setLastName("Jensen");
         person.setAge(30);
