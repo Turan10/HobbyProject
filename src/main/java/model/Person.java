@@ -40,18 +40,18 @@ public class Person {
         lastEdited = LocalDate.now();
     }
 
-    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
-    @OneToMany(mappedBy = "person", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Phone> phones = new HashSet<>();
 
     public void addHobby(Hobby hobby){
-        hobbies.add(hobby);
+        this.hobbies.add(hobby);
         if(hobby != null)
         {
             hobby.getPersons().add(this);

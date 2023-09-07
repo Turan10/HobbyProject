@@ -23,7 +23,7 @@ public class HibernateConfig {
             props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/HobbyDb?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
-            props.put("hibernate.show_sql", "true"); // show sql in console
+            props.put("hibernate.show_sql", "false"); // show sql in console
             props.put("hibernate.format_sql", "true"); // format sql in console
             props.put("hibernate.use_sql_comments", "true"); // show sql comments in console
 
@@ -60,6 +60,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(model.Person.class);
         configuration.addAnnotatedClass(model.Phone.class);
         configuration.addAnnotatedClass(model.Type.class);
+
 
         // add annotated classes
         // configuration.addAnnotatedClass(<YOUR ENTITY>.class);
