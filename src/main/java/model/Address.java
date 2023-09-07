@@ -34,21 +34,6 @@ public class Address {
     private City city;
 
 
-    public void addCity(int zip)
-    {
-        CityDAO cityDAO = new CityDAO();
-        City city = cityDAO.getCityByZip(zip);
-
-        if (city != null)
-        {
-            this.setCity(city);
-        } else
-        {
-            throw new RuntimeException("City does not exist in database");
-        }
-
-
-    }
 
 }
 

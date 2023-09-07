@@ -33,7 +33,6 @@ public class PersonDAO {
             query.setParameter("hobbyName", hobbyName);
             return query.getResultList();
         }
-
     }
 
     public Person getPersonInfoByPhoneNumber(String number) {
@@ -61,13 +60,15 @@ public class PersonDAO {
         }
     }
 
-    public void deletePerson(Person person) {
+    public void deleteByPersonId(Person person) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.remove(person);
             em.getTransaction().commit();
         }
     }
+
+
 
     public Person updatePerson(Person person) {
         try (EntityManager em = emf.createEntityManager()) {
@@ -78,13 +79,18 @@ public class PersonDAO {
         }
     }
 
+    public Person getPersonById(int Id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Person.class, Id);
+        }
+    }
+
     public Person getPersonByName(String name) {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.name = :name", Person.class);
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.firstName = :name", Person.class);
             query.setParameter("name", name);
             return query.getSingleResult();
         }
-
     }
 
         public List<Person> findPersonsByCityZip(int zip) {
