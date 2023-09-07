@@ -36,7 +36,7 @@ Turan also worked on the user stories  US-3, US-5, US-8, and US-9.
 
 - **[Sitthichai]**:
 
-- **[Vivek]**:
+- **[Vivek]**: Created the, populate Hobby method which gets all the hobbies from the provided .csv file, the populate type which gets all the types from the hobbies so we can create hobbies using them. Tested the methods in DAOs and entities concerning Hobby, Type, (Populate), and person.
 
 - **[Metin]**:
 
