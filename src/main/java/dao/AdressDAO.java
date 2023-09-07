@@ -17,4 +17,12 @@ public class AdressDAO {
             return address;
         }
     }
+
+    public Address getAddressById(int id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Address.class, id);
+        }
+    }
+
+
 }
