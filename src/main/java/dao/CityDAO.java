@@ -48,9 +48,9 @@ public class CityDAO {
         }
     }
 
-    public City getCityByName(String name) {
+    public City getCityByZip(int id) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.find(City.class, name);
+            return em.find(City.class, id);
         }
     }
 

@@ -1,5 +1,6 @@
 package model;
 
+import dao.CityDAO;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class Person {
     private LocalDate lastEdited;
 
 
+
     public Person(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +44,7 @@ public class Person {
     private Set<Hobby> hobbies = new HashSet<>();
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
     @OneToMany(mappedBy = "person", cascade=CascadeType.ALL)
@@ -69,5 +71,6 @@ public class Person {
         String pattern = "^\\+45\\d{8}$";
         return number.getNumber().matches(pattern);
     }
+
 
 }
