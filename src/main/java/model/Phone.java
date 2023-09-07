@@ -21,6 +21,12 @@ public class Phone {
         this.number = number;
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Person person;
+
+
+
+
 }
+
+

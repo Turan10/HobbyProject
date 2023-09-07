@@ -32,6 +32,4 @@ public class City {
         this.municipalityName = municipalityName;
     }
 
-    @OneToMany(mappedBy = "city")
-    private Set<Adress> addresses = new HashSet<>();
 }

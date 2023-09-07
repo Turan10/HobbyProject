@@ -12,19 +12,15 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-public class Adress {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String street;
 
-<<<<<<< Updated upstream:src/main/java/model/Adress.java
 
 
-    public Adress(String street) {
-=======
     public Address(String street) {
->>>>>>> Stashed changes:src/main/java/model/Address.java
         this.street = street;
 
     }
@@ -33,7 +29,7 @@ public class Adress {
     private Set<Person> persons;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private City city;
 
 }

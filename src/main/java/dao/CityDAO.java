@@ -1,41 +1,68 @@
 package dao;
 
+import dto.CityPostcodeAndName;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 import model.City;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.util.List;
 
 
 public class CityDAO {
-    private static final System.Logger logger = System.getLogger(CityDAO.class.getName());
-    public void populateDatabase(EntityManager em, String fileName) {
-        if (em == null) {
-            throw new IllegalArgumentException("EntityManager cannot be null");
-        }
-        if (fileName == null) {
-            throw new IllegalArgumentException("File name cannot be null");
-        }
-        File file = new File(fileName);
-        if (!file.exists() || !file.isFile()) {
-            throw new IllegalArgumentException("File does not exist: " + fileName);
-        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
+    private static CityDAO instance;
+    EntityManagerFactory emf = config.HibernateConfig.getEntityManagerFactoryConfig();
+
+
+    public static CityDAO getInstance() {
+        if (instance == null) {
+            instance = new CityDAO();
+        }
+        return instance;
+    }
+
+
+    public void persistCity(City city) {
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            while ((line = br.readLine()) != null) {
-                em.createNativeQuery(line).executeUpdate();
-            }
+            em.persist(city);
             em.getTransaction().commit();
-        } catch (IOException e) {
-            em.getTransaction().rollback();
-            logger.log(System.Logger.Level.ERROR, "Error populating database", e);
-            throw new RuntimeException("Error populating database", e);
         }
     }
+
+    public void deleteCity(City city) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.remove(city);
+            em.getTransaction().commit();
+        }
+    }
+
+    public City updateCity(City city) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            City city1 = em.merge(city);
+            em.getTransaction().commit();
+            return city1;
+        }
+    }
+
+    public City getCityByName(String name) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(City.class, name);
+        }
+    }
+
+
+    public List<CityPostcodeAndName> getAllPostcodesAndCityNamesInDenmark() {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<CityPostcodeAndName> query = em.createQuery("SELECT c FROM City c", CityPostcodeAndName.class);
+            return query.getResultList();
+
+        }
+
+    }
+
 
 }
