@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HobbyDAOTest {
 
-    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();;
+    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
     private EntityManager em;
     private TypeDAO typeDAO;
     private PopulateDAO populateDAO;
