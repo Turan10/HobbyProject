@@ -32,7 +32,7 @@ We agreed upon working in the school together from 10 am until 2 pm, and then wo
 For the project burden we managed to help each other throughout the project, but we all where assigned specific user stories: 
 
 - **[Turan]**: Created a method for us to populate the database by using a .csv file. This allowed us to quickly populate the database with data, and test our queries. 
-Turan also worked on the user stories  US-3, US-5, US-8, and US-9.
+Turan also worked on the user stories  US-3, US-5, US-8
 - 
 - **[Sitthichai]**: Created method to retrieve all the information about a person. Also worked on relationships between the different entities and helped refactoring the DAO classes 
 
