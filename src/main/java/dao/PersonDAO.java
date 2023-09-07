@@ -4,16 +4,11 @@ import config.HibernateConfig;
 import dto.PersonInfoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
-import model.Address;
-import model.Hobby;
 import model.Person;
-import model.Phone;
 
 import java.util.List;
-import java.util.Set;
 
 public class PersonDAO {
 
@@ -45,12 +40,19 @@ public class PersonDAO {
     }
 
 
-    public Person addPerson(Person person) {
+    public void addPerson(Person person) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(person);
             em.getTransaction().commit();
-            return person;
+        }
+    }
+
+    public void addPersonAddress(Address address) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.persist(address);
+            em.getTransaction().commit();
         }
     }
 
@@ -81,14 +83,14 @@ public class PersonDAO {
 
     public Person getPersonByName(String name) {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.firstName = :name", Person.class);
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.name = :name", Person.class);
             query.setParameter("name", name);
             return query.getSingleResult();
         }
     }
 
-    public List<Person> findPersonsByCityZip(int zip) {
-        try (EntityManager em = emf.createEntityManager()) {
+        public List<Person> findPersonsByCityZip(int zip) {
+            try(EntityManager em = emf.createEntityManager()){
             TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.address.city.zip = :zip", Person.class);
             query.setParameter("zip", zip);
             return query.getResultList();
