@@ -55,6 +55,8 @@ public class PhoneDAO {
 
     public Phone getPhoneByNumber(String number) {
         try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p WHERE p.number = :number", Phone.class);
+            query.setParameter("number", number);
             return em.find(Phone.class, number);
         }
     }

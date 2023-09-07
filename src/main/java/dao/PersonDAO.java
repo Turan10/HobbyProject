@@ -68,7 +68,9 @@ public class PersonDAO {
 
     public Person getPersonByName(String name) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.find(Person.class, name);
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.name = :name", Person.class);
+            query.setParameter("name", name);
+            return query.getSingleResult();
         }
 
     }
