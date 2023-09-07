@@ -28,7 +28,6 @@ public class HobbyDAO {
             TypedQuery<HobbyWithCount> query = em.createQuery("Select new dto.HobbyWithCount(h, count (p)) from Hobby h left join h.persons p group by h", HobbyWithCount.class);
             return query.getResultList();
         }
-
     }
 
     public void persistHobby(Hobby hobby) {
@@ -61,6 +60,7 @@ public class HobbyDAO {
             return em.find(Hobby.class, name);
         }
     }*/
+    //Ny getHobbyByName fordi name ikke er PK i vores tabel og
     public Hobby getHobbyByName(String name) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h WHERE h.name = :name", Hobby.class);
@@ -113,7 +113,7 @@ public class HobbyDAO {
                     if (newType == null) {
                         newType = new Type();
                         newType.setName(newTypeName);
-                        em.persist(newType);  // Persist the new Type object
+                        em.persist(newType);  // creates new object of type if none are found
                     }
                 }
                 hobby.setType(newType);

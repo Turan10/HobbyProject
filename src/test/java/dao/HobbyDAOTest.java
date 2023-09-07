@@ -1,11 +1,13 @@
 package dao;
 
 import config.HibernateConfig;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+
 import model.*;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HobbyDAOTest {
 
-    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();;
+    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
     private EntityManager em;
     private TypeDAO typeDAO;
     private PopulateDAO populateDAO;
@@ -108,8 +110,6 @@ class HobbyDAOTest {
 
     }
 
-
-
     @Test
     void getHobby(){
         String hobbyName = "Ballin";
@@ -151,17 +151,14 @@ class HobbyDAOTest {
 
     @Test
     void deleteHobby() {
+        HobbyDAO hobbyDAO = new HobbyDAO();
         int hobbyId = 1356;
 
         Hobby existingHobby = em.find(Hobby.class, hobbyId);
-
         assertNotNull(existingHobby, "Hobby should exist");
 
-        em.getTransaction().begin();
-        em.remove(existingHobby);
-
+        hobbyDAO.deleteHobby(existingHobby);
         assertNull(em.find(Hobby.class, hobbyId), "Hobby should be deleted");
-        em.getTransaction().commit();
     }
 
     @Test
