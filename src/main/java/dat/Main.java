@@ -24,7 +24,7 @@ public class Main {
 
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
-       /* try (EntityManager em = emf.createEntityManager()) {
+      /*  try (EntityManager em = emf.createEntityManager()) {
             TypeDAO populateType = new TypeDAO();
             populateType.populateTypes(em, "src/main/resources/hobby.csv");
 
@@ -32,6 +32,9 @@ public class Main {
             populateDAO.populateDatabase(em, "src/main/resources/hobby.csv");
 
             populateDAO.populateDatabase(em, "src/main/resources/zip.csv");
+
+
+        }
 */
 
 
