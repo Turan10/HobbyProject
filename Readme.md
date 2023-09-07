@@ -38,7 +38,7 @@ Turan also worked on the user stories  US-3, US-5, US-8, and US-9.
 
 - **[Vivek]**: Created the, populate Hobby method which gets all the hobbies from the provided .csv file, the populate type which gets all the types from the hobbies so we can create hobbies using them. Tested the methods in DAOs and entities concerning Hobby, Type, (Populate), and person.
 
-- **[Metin]**:
+- **[Metin]**: Created the user stories US-6 and US-7, created tests for some DAO classes, and entities. Created CRUD for AddressDAO, and worked on some tests for other DAO classes, and entities.
 
 ---
 

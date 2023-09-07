@@ -47,7 +47,6 @@ public class TypeDAO {
                 Type existingType = em.find(Type.class, typeName);
 
                 if (existingType == null) {
-                    // If type does not exist, create and persist it
                     Type type = new Type(typeName);
                     em.persist(type);
                 }

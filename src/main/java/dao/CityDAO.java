@@ -61,9 +61,5 @@ public class CityDAO {
             return query.getResultList();
 
         }
-
     }
-
-
-
 }
