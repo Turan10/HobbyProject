@@ -152,7 +152,7 @@ class HobbyDAOTest {
     @Test
     void deleteHobby() {
         HobbyDAO hobbyDAO = new HobbyDAO();
-        int hobbyId = 1356;
+        int hobbyId = 452;
 
         Hobby existingHobby = em.find(Hobby.class, hobbyId);
         assertNotNull(existingHobby, "Hobby should exist");
@@ -160,6 +160,7 @@ class HobbyDAOTest {
         hobbyDAO.deleteHobby(existingHobby);
         assertNull(em.find(Hobby.class, hobbyId), "Hobby should be deleted");
     }
+
 
     @Test
     void getHobbiesWithCount() {

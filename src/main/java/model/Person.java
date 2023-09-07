@@ -38,7 +38,7 @@ public class Person {
         lastEdited = LocalDate.now();
     }
 
-    @ManyToMany(mappedBy = "persons", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
 

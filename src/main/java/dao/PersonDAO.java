@@ -48,23 +48,14 @@ public class PersonDAO {
         }
     }
 
-    /*public void deleteByPersonId(Integer id) {
+    public void deleteByPersonId(Person person) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.remove(id);
+            em.remove(person);
             em.getTransaction().commit();
         }
-    }*/
-
-    public void deleteByPersonId(int personId) {
-        try(EntityManager em = emf.createEntityManager()) {
-            Person person = em.find(Person.class, personId);
-            if(person != null) {
-                em.remove(person);
-            }
-        }
-
     }
+
 
 
     public Person updatePerson(Person person) {

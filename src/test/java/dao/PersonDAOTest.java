@@ -27,22 +27,7 @@ class PersonDAOTest {
     private Person person = new Person();
 
 
-    @BeforeEach
-    public void setUp() {
-        em = emf.createEntityManager();
-        populateDAO= new PopulateDAO();
-        typeDAO = new TypeDAO();
-    }
 
-    @AfterEach
-    public void tearDown(){
-        if (em != null) {
-            em.close();
-        }
-        if (emf != null) {
-            emf.close();
-        }
-    }
 
     @Test
     void getPersonsByHobby() {
@@ -67,7 +52,9 @@ class PersonDAOTest {
 
     @Test
     void testAddPerson() {
-        Person newPerson = new Person("Mr", "Baller", 30);
+        Person newPerson = new Person("Sitthichai", "Akbas", 28);
+
+        em = emf.createEntityManager();
 
         personDAO.addPerson(newPerson);
 
@@ -86,19 +73,18 @@ class PersonDAOTest {
 
     @Test
     void getPersonByName() {
-            String name = "Mr";
+        String name = "Mr";
 
-            Person fetchedPerson = personDAO.getPersonByName(name);
+        Person fetchedPerson = personDAO.getPersonByName(name);
 
-            assertNotNull(fetchedPerson, "Person should exist for given name.");
-            assertEquals(name, fetchedPerson.getFirstName());
+        assertNotNull(fetchedPerson, "Person should exist for given name.");
+        assertEquals(name, fetchedPerson.getFirstName());
 
         System.out.println(fetchedPerson.getId());
     }
 
     @Test
     void updatePerson() {
-        int personId = 6;
         String currentName = "Mr";
         String newPersonName = "Metin";
 
@@ -113,20 +99,43 @@ class PersonDAOTest {
 
 
     @Test
-    void deletePerson() {
-        int personId = 6;
+    public void deleteByPersonId() {
+        int personId= 5;
 
-        personDAO.deleteByPersonId(personId);
+        Person person1 = personDAO.getPersonById(personId);
 
-        Person deletedPerson = personDAO.getPersonById(personId);
+        personDAO.deleteByPersonId(person1);
 
-        assertNull(deletedPerson,"Person should be deleted");
+        assertNull(personDAO.getPersonById(personId));
 
     }
 
+    @Test
+    public void testAddExistingHobbyToPerson() {
+        int hobbyId = 9;
+        int personId = 3;
+
+        Hobby existingHobby = hobbyDAO.getHobbyById(hobbyId);
+
+        Person personToUpdate = personDAO.getPersonById(personId);
+
+        personToUpdate.addHobby(existingHobby);
+
+        personDAO.updatePerson(personToUpdate);
+
+        Person updatedPerson = personDAO.getPersonById(personId);
+
+        System.out.println(updatedPerson.getHobbies().toString()+ "list of hobbies");
+
+        assertTrue(updatedPerson.getHobbies().contains(existingHobby));
+}
+
 
     @Test
-    void findPersonsByCityZip() {
-
+    void testFindPersonsByCityZip() {
+        int zip = 2200;
+        PersonDAO personDAO = new PersonDAO();
+        List<Person> persons = personDAO.findPersonsByCityZip(zip);
+        assertEquals(1, persons.size());
     }
 }

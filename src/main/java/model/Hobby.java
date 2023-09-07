@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -31,7 +32,7 @@ public class Hobby {
     @ManyToOne
     private Type type;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Set<Person> persons = new HashSet<>();
 
 
@@ -40,5 +41,29 @@ public class Hobby {
         this.wikilink = wikilink;
         this.category = category;
         this.type = new Type(type);
+    }
+
+    @Override
+    public String toString() {
+        return "Hobby{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", wikilink='" + wikilink + '\'' +
+                ", category='" + category + '\'' +
+                ", type=" + type +
+                ", persons=" + persons +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hobby hobby = (Hobby) o;
+        return Objects.equals(id, hobby.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
