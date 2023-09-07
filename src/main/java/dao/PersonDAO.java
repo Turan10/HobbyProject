@@ -1,6 +1,7 @@
 package dao;
 
 import config.HibernateConfig;
+import dto.PersonInfoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -85,7 +86,12 @@ public class PersonDAO {
     }
 
 
-}
+
+    }
+
+
+
+
 
 
 
