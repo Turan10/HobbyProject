@@ -22,7 +22,7 @@ We have created a simple and scalable domain model that can be easily extended t
 
 ## EER Diagram
 
-
+![img_1.png](img_1.png)
 
 ## Work Process
 

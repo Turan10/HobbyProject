@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "hobbies_temp")
+
 public class Hobby {
 
     @Id

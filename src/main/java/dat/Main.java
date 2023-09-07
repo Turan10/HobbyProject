@@ -1,6 +1,9 @@
 package dat;
 
+import config.HibernateConfig;
 import dao.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import model.Address;
 import model.Person;
 import model.Phone;
@@ -9,6 +12,8 @@ import model.Phone;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+        EntityManager em = emf.createEntityManager();
 
         /*EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
@@ -32,22 +37,29 @@ public class Main {
             populateDAO.populateDatabase(em, "src/main/resources/zip.csv");*/
 
 
-          Person p = new Person("Vivek", "Nagra", 26);
-          Address a = new Address("Amagerbrogade 25");
-          Phone phone1 = new Phone("+4512345678");
-          Phone phone2 = new Phone("+4532154367");
-          AddressDAO addressDAO = new AddressDAO();
+//          Person p = new Person("Vivek", "Nagra", 26);
+//          Address a = new Address("Amagerbrogade 25");
+//          Phone phone1 = new Phone("+4512345678");
+//          Phone phone2 = new Phone("+4532154367");
+//          AddressDAO addressDAO = new AddressDAO();
+//
+//          a.addCity(2200);
+//
+//          p.setAddress(a);
+//          p.addPhone(phone1);
+//          p.addPhone(phone2);
+//
+//          PersonDAO personDAO = new PersonDAO();
+//
+//          personDAO.addPerson(p);
+//
+//        System.out.println(p.getAddress().getId());
 
-          a.addCity(2200);
-
-          p.setAddress(a);
-          p.addPhone(phone1);
-          p.addPhone(phone2);
-
-          PersonDAO personDAO = new PersonDAO();
-
-          personDAO.addPerson(p);
-
-        System.out.println(p.getAddress().getId());
-        }
+        PopulateDAO populateDAO = new PopulateDAO();
+        TypeDAO typeDAO = new TypeDAO();
+        typeDAO.populateTypes(em, "src/main/resources/hobby.csv");
+        populateDAO.populateDatabase(em, "src/main/resources/zip.csv");
+        populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
+//        }
     }
+}

@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "persons_temp")
+
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

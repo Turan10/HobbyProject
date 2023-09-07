@@ -6,9 +6,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
+import model.Address;
+import model.Hobby;
 import model.Person;
+import model.Phone;
 
 import java.util.List;
+import java.util.Set;
 
 public class PersonDAO {
 
