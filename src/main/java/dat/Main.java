@@ -57,9 +57,9 @@ public class Main {
 
         PopulateDAO populateDAO = new PopulateDAO();
         TypeDAO typeDAO = new TypeDAO();
-        typeDAO.populateTypes(em, "src/main/resources/hobby.csv");
-        populateDAO.populateDatabase(em, "src/main/resources/zip.csv");
-        populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
+
+        populateDAO.populateDatabase(em, "C:\\Users\\Caner\\OneDrive\\Dokumenter\\GitHub\\HobbyProject\\src\\main\\resources\\zip.csv");
+
 //        }
     }
 }

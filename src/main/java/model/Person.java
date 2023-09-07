@@ -57,17 +57,12 @@ public class Person {
     }
 
     public void addPhone(Phone phone) {
-        if (validatePhoneNumber(phone)) {
+        if (phone.validatePhoneNumber()) {
             phones.add(phone);
             phone.setPerson(this);
         } else {
             System.out.println("Invalid phone number");
         }
-    }
-
-    private boolean validatePhoneNumber(Phone number) {
-        String pattern = "^\\+45\\d{8}$";
-        return number.getNumber().matches(pattern);
     }
 
 }

@@ -52,7 +52,7 @@ class CityDAOTest {
         int cityZip = 2700;
         CityDAO cityDAO = new CityDAO();
         City city = cityDAO.getCityByZip(cityZip);
-        assertEquals("København NV", city.getCityName());
+        assertEquals("Brønshøj", city.getCityName());
     }
 
     @Test

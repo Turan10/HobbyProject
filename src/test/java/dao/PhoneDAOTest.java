@@ -58,4 +58,18 @@ class PhoneDAOTest {
 
         assertNull(em.find(Phone.class, phone.getId()), "Phone should be deleted");
     }
+
+    @Test
+    @DisplayName("TEST Validate Phone Number - Valid")
+    public void validatePhoneNumberTest() {
+        Phone number = new Phone("+4551234567");  // This matches the pattern
+        assertTrue(number.validatePhoneNumber());
+    }
+
+    @Test
+    @DisplayName("TEST Validate Phone Number - Invalid")
+    public void invalidatePhoneNumberTest() {
+        Phone number = new Phone("+51234567");  // This matches the pattern
+        assertFalse(number.validatePhoneNumber());
+    }
 }

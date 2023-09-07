@@ -24,4 +24,10 @@ public class Phone {
     @ManyToOne
     private Person person;
 
+
+   public boolean validatePhoneNumber() {
+        String pattern = "^\\+45\\d{8}$";
+        return this.number.matches(pattern);
+    }
+
 }
