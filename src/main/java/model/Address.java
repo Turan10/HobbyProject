@@ -18,8 +18,6 @@ public class Address {
     private int id;
     private String street;
 
-
-
     public Address(String street) {
         this.street = street;
 
@@ -33,4 +31,3 @@ public class Address {
     private City city;
 
 }
-

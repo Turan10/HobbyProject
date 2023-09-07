@@ -4,11 +4,20 @@ import config.HibernateConfig;
 import dao.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import model.Person;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+
+        try (EntityManager em = emf.createEntityManager()) {
+            Person metin = new Person("Metin", "Akbas", 22);
+            em.persist(metin);
+        }
+
 
         /*EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
@@ -17,21 +26,17 @@ public class Main {
             populateZip.populateDatabase(em, "src/main/resources/zip.csv");*/
 
 
-            //populateZip.populateDatabase(em, "src/main/resources/hobby.csv");
+        //populateZip.populateDatabase(em, "src/main/resources/hobby.csv");
 
 
 
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
+/*        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
 
         try(EntityManager em = emf.createEntityManager()) {
             TypeDAO populateType = new TypeDAO();
             populateType.populateTypes(em,"src/main/resources/hobby.csv");
 
             PopulateDAO populateDAO = new PopulateDAO();
-            populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");
-
-
-        }
-
+            populateDAO.populateDatabase(em,"src/main/resources/hobby.csv");*/
     }
 }
